@@ -1,0 +1,36 @@
+def knapsack_greedy(capacity, weights, profits):
+    # Calculate the value-to-weight ratio for each item
+    ratios = [(profit / weight, weight, profit) for weight, profit in zip(weights, profits)]
+
+    # Sort items based on the ratio in descending order
+    ratios.sort(reverse=True)
+
+    total_weight = 0
+    total_profit = 0
+    selected_items = []
+
+    for ratio, weight, profit in ratios:
+        if total_weight + weight <= capacity:
+            # Include the item in the knapsack
+            selected_items.append((weight, profit))
+            total_weight += weight
+            total_profit += profit
+
+    return selected_items, total_weight, total_profit
+
+def main():
+    # Given data
+    knapsack_capacity = 20
+    weights = [3, 5, 5, 8, 4]
+    profits = [10, 20, 21, 30, 16]
+
+    # Solve the knapsack problem using the greedy approach
+    selected_items, total_weight, total_profit = knapsack_greedy(knapsack_capacity, weights, profits)
+
+    # Display the results
+    print("Selected Items:", selected_items)
+    print("Total Weight in Knapsack:", total_weight)
+    print("Total Profit:", total_profit)
+
+if __name__ == "__main__":
+    main()

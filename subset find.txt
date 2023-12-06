@@ -1,0 +1,30 @@
+def subset_sum(nums, target):
+    result = []
+    subset_sum_util(nums, target, [], result)
+
+    if not result:
+        print("No solution exists.")
+    else:
+        print("Subsets with sum equal to", target, "are:")
+        for subset in result:
+            print(subset)
+
+def subset_sum_util(nums, target, partial, result):
+    current_sum = sum(partial)
+
+    if current_sum == target:
+        result.append(partial)
+        return
+
+    if current_sum > target:
+        return
+
+    for i in range(len(nums)):
+        remaining = nums[i + 1:]
+        subset_sum_util(remaining, target, partial + [nums[i]], result)
+
+# Example usage
+S = [1, 2, 5, 6, 8]
+d = 9
+
+subset_sum(S, d)

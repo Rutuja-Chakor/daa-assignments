@@ -1,0 +1,37 @@
+import random
+
+def binary_search(arr, low, high, key):
+    if high >= low:
+        mid = (low + high) // 2
+
+        if arr[mid] == key:
+            return mid
+        elif arr[mid] > key:
+            return binary_search(arr, low, mid - 1, key)
+        else:
+            return binary_search(arr, mid + 1, high, key)
+    else:
+        return -1
+
+def main():
+    # Generate a random list of at least 5000 elements
+    random_list = [random.randint(1, 10000) for _ in range(5000)]
+
+    # Sort the list
+    random_list.sort()
+
+    print("Random List:", random_list)
+
+    # Take user input for the key element
+    key = int(input("Enter the key element to search: "))
+
+    # Perform binary search
+    result = binary_search(random_list, 0, len(random_list) - 1, key)
+
+    if result != -1:
+        print(f"Element {key} found at index {result}.")
+    else:
+        print(f"Element {key} not found in the list.")
+
+if __name__ == "__main__":
+    main()

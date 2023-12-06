@@ -1,0 +1,28 @@
+def knapsack_backtracking(capacity, weights, values):
+    n = len(weights)
+    max_value = [0]
+
+    def backtrack(index, current_weight, current_value):
+        nonlocal max_value
+
+        if index == n or current_weight == capacity:
+            max_value[0] = max(max_value[0], current_value)
+            return
+
+        # Include the item if it doesn't exceed the capacity
+        if current_weight + weights[index] <= capacity:
+            backtrack(index + 1, current_weight + weights[index], current_value + values[index])
+
+        # Exclude the item
+        backtrack(index + 1, current_weight, current_value)
+
+    backtrack(0, 0, 0)
+    return max_value[0]
+
+# Example usage
+capacity = 50
+weights = [10, 20, 30]
+values = [60, 100, 120]
+
+result_backtracking = knapsack_backtracking(capacity, weights, values)
+print("Backtracking Result:", result_backtracking)

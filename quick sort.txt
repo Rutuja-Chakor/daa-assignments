@@ -1,0 +1,22 @@
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        pivot = arr[0]
+        left = [x for x in arr[1:] if x <= pivot]
+        right = [x for x in arr[1:] if x > pivot]
+
+        return quick_sort(left) + [pivot] + quick_sort(right)
+
+def main():
+    # Example usage
+    unsorted_list = [38, 27, 43, 3, 9, 82, 10]
+    print("Unsorted List:", unsorted_list)
+
+    # Perform Quick Sort
+    sorted_list = quick_sort(unsorted_list)
+
+    print("Sorted List:", sorted_list)
+
+if __name__ == "__main__":
+    main()

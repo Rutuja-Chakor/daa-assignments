@@ -1,0 +1,32 @@
+class Item:
+    def __init__(self, weight, value):
+        self.weight = weight
+        self.value = value
+        self.cost = value / weight
+
+def knapsack_branch_and_bound(capacity, weights, values):
+    n = len(weights)
+    items = [Item(weights[i], values[i]) for i in range(n)]
+    items.sort(key=lambda x: x.cost, reverse=True)
+
+    max_value = 0
+    current_weight = 0
+
+    for item in items:
+        if current_weight + item.weight <= capacity:
+            current_weight += item.weight
+            max_value += item.value
+        else:
+            remaining_capacity = capacity - current_weight
+            max_value += (remaining_capacity / item.weight) * item.value
+            break
+
+    return max_value
+
+# Example usage
+capacity = 50
+weights = [10, 20, 30]
+values = [60, 100, 120]
+
+result_branch_and_bound = knapsack_branch_and_bound(capacity, weights, values)
+print("Branch and Bound Result:", result_branch_and_bound)
